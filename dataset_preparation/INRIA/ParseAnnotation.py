@@ -6,16 +6,17 @@ class InriaParser():
     def __init__(self, path):
         self.path = path
 
+
     def get_annotation(self, img_name):
-        filepath = os.path.join(self.path, img_name + '.txt')
+        filepath = os.path.join(self.path, img_name)
         with open(filepath, 'r') as f:
             data = f.readlines()
 
         bboxes = list()
 
         for d in data:
-            if re.search(img_name, d):
-                filename = re.findall(img_name + '.[A-z]*', d)
+            if re.search(img_name.strip('.txt'), d):
+                filename = re.findall(img_name.strip('.txt') + '.[A-z]*', d)
             if re.search('age size', d):
                 img_size = re.findall('\d+', d)
             if re.search('.*erson.*\(\d+,\s\d+\)\s-\s\(\d+,\s\d+\)', d):
@@ -36,6 +37,6 @@ class InriaParser():
 
 if __name__ == '__main__':
     parser = InriaParser('/home/ambastha/data/inria-person/INRIAPerson/Train/annotations')
-    im = parser.get_annotation('person_177')
+    im = parser.get_annotation('person_177.txt')
     print im.get_dict()
     # print box

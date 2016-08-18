@@ -11,14 +11,6 @@ class Image():
     def add_rectangles(self, rects):
         self.bboxes.extend(rects)
 
-    def to_json(self):
-        im = {}
-        rects = {}
-        rects['num_objects'] = len(self.bboxes)
-        rects['coords_list'] = [d.__dict__ for d in self.bboxes]
-        im[self.name] = rects
-        return im
-
     def get_dict(self):
         self.__dict__['bboxes'] = [rect.__dict__ for rect in self.bboxes]
         self.__dict__['num_objects'] = len(self.bboxes)
@@ -42,7 +34,5 @@ if __name__ == '__main__':
 
     im = Image('myimage.jpg')
     im.add_rectangles([a, a])
-
-    d = im.to_json()
 
     print im.get_dict()
