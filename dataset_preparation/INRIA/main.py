@@ -13,6 +13,7 @@ def get_files():
 
 def main():
     annotation_path = '/home/ambastha/data/inria-person/INRIAPerson/Train/annotations'
+    curr_dir = os.getcwd()
     os.chdir(annotation_path)
     images = get_files()
     parser = InriaParser(annotation_path)
@@ -22,7 +23,9 @@ def main():
         temp = im.get_dict()
         main_dict[temp['name']] = temp
 
-    print main_dict
+    os.chdir(curr_dir)
+    with open('results.json', 'w') as f:
+        json.dump(main_dict, f, indent=4)
 
 
 if __name__ == '__main__':
