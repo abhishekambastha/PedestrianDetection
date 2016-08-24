@@ -8,14 +8,15 @@ class InriaParser():
 
 
     def get_annotation(self, img_name):
-        filepath = os.path.join(self.path, img_name)
+        img_anno = os.path.splitext(img_name)[0]
+        filepath = os.path.join(self.path, 'annotations', img_anno + '.txt')
         with open(filepath, 'r') as f:
             data = f.readlines()
 
         bboxes = list()
         for d in data:
-            if re.search(img_name.strip('.txt'), d):
-                filename = re.findall(img_name.strip('.txt') + '.[A-z]*', d)
+            if re.search(img_anno, d):
+                filename = re.findall(img_anno + '.[A-z]*', d)
             if re.search('age size', d):
                 img_size = re.findall('\d+', d)
             if re.search('.*erson.*\(\d+,\s\d+\)\s-\s\(\d+,\s\d+\)', d):
@@ -27,6 +28,7 @@ class InriaParser():
         im.width = img_size[0]
         im.height = img_size[1]
         im.add_rectangles(bboxes)
+        im.image_path = os.path.join(self.path, 'pos')
 
         return im
 

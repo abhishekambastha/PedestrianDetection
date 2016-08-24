@@ -7,9 +7,12 @@ class Image():
         self.num_objects = 0
         self.width = 0
         self.height = 0
+        self.image_path = None
+
 
     def add_rectangles(self, rects):
         self.bboxes.extend(rects)
+
 
     def get_dict(self):
         self.__dict__['bboxes'] = [rect.__dict__ for rect in self.bboxes]
