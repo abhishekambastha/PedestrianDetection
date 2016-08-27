@@ -115,11 +115,9 @@ class LMDB():
                 txn.put(str_id.encode('ascii'), annotated_datum.SerializeToString())
                 print '[INFO]: Added image {} with {} bboxes'.format(im.image_path, len(normal_boxes))
 
-        # cv2.imwrite(image_set + '_mean.jpg' ,mean_image/1000)
-
 
 if __name__ == '__main__':
-    inria = InriaLMDB('/home/ambastha/data/inria-person/INRIAPerson/Train')
+    inria = InriaLMDB('/home/ambastha/data/inria-person/INRIAPerson/Test')
     img_objs = inria.create_img_objects()
-    l = LMDB('train.lmdb')
+    l = LMDB('test.lmdb')
     l.create_lmdb(img_objs)
