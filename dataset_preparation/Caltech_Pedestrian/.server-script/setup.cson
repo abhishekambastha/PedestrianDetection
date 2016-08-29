@@ -1,0 +1,15 @@
+
+# This file specifies server-script configuration for this project
+# If you cannot see secrets.cson in Atom, click on the treeview and press the letter i
+
+server:
+  location: '192.168.2.24'
+  projectRoot: '/home/ambastha/projects/pedestrian_detection/dataset_preparation/caltech'
+  # login info is kept in secrets.cson
+
+options:
+  syncChangedFiles: yes
+  scriptOnRun:  'build.sh'
+  scriptOnSave: ''
+  useGitignore: yes
+  logToConsole: yes
